@@ -4,6 +4,7 @@ from reflex_ddns_auth.intent import IntentPage, intent
 from reflex_ddns_livekit_video_chat import livekit_server
 from reflex_ddns_livekit_video_chat.livekit_bridge import LiveKitBridgeState, bind_livekit
 from reflex_ddns_livekit_video_chat.livekit_proxy import register_livekit_routes
+from reflex_ddns_livekit_video_chat.static_pages import serve_pages_without_slash_redirect
 from reflex_ddns_livekit_video_chat.states.server_state import ServerStatusState
 from reflex_ddns_livekit_video_chat.states.settings_state import SettingsState
 
@@ -583,7 +584,7 @@ def index() -> rx.Component:
 
 
 app = rx.App(
-    theme=rx.theme(appearance="light"),
+    api_transformer=serve_pages_without_slash_redirect,
     head_components=[
         rx.el.link(rel="preconnect", href="https://fonts.googleapis.com"),
         rx.el.link(rel="preconnect", href="https://fonts.gstatic.com", cross_origin=""),
